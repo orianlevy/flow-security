@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
 import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Posts from "./components/Posts";
+import Home from "./components/Home";
+import Nav from "./components/Nav";
+import Statistics from "./components/Statistics";
+import {AppProvider} from "./AppContext";
+import Actions from "./Actions";
 
 function App() {
+
+    useEffect(()=> {
+        Actions.appContext = AppProvider;
+    },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <AppProvider>
+          <BrowserRouter>
+              <Nav />
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/posts" element={<Posts />} />
+                  <Route path="/statistics" element={<Statistics />} />
+              </Routes>
+          </BrowserRouter>
+      </AppProvider>
   );
 }
 
