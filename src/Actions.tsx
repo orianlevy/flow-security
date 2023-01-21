@@ -1,7 +1,6 @@
 import axios from "axios";
 
 class Actions {
-    appContext?: any
     getPosts(setItems: any) {
         const getPostsURL= "http://rest.flowsec.xyz/posts";
         axios.get(getPostsURL).then((response) => {
